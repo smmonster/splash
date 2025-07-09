@@ -108,7 +108,7 @@ export default function SplashMaterialCheck() {
           // 오차율 계산: 모든 가이드와 비교
           const errorArr = [];
           for (let i = 0; i < GUIDE_LIST.length; ++i) {
-            const guideSrc = "/" + GUIDE_LIST[i].file;
+            const guideSrc = "" + GUIDE_LIST[i].file;
             const error = await getOverlapErrorPercent(ev.target.result, guideSrc, PREVIEW_W, PREVIEW_H);
             errorArr.push(error);
           }
