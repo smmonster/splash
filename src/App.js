@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import "./App.css";
 
 const GUIDE_LIST = [
-  { name: "기본형 1", file: process.env.PUBLIC_URL + "/지도스플래시_기본형_1.png" },
-  { name: "기본형 2", file: process.env.PUBLIC_URL + "/지도스플래시_기본형_2.png" },
-  { name: "기본형 3", file: process.env.PUBLIC_URL + "/지도스플래시_기본형_3.png" },
-  { name: "로고형 1", file: process.env.PUBLIC_URL + "/지도스플래시_로고형_1.png" },
-  { name: "로고형 2", file: process.env.PUBLIC_URL + "/지도스플래시_로고형_2.png" },
-  { name: "확장형 1", file: process.env.PUBLIC_URL + "/지도스플래시_확장형_1.png" },
-  { name: "확장형 2", file: process.env.PUBLIC_URL + "/지도스플래시_확장형_2.png" },
-  { name: "확장형 3", file: process.env.PUBLIC_URL + "/지도스플래시_확장형_3.png" },
-  { name: "썸네일형 1", file: process.env.PUBLIC_URL + "/지도스플래시_썸네일형_1.png" },
-  { name: "썸네일형 2", file: process.env.PUBLIC_URL + "/지도스플래시_썸네일형_2.png" }
+  { name: "기본형 1", file: process.env.PUBLIC_URL + "/normal_1.png" },
+  { name: "기본형 2", file: process.env.PUBLIC_URL + "/normal_2.png" },
+  { name: "기본형 3", file: process.env.PUBLIC_URL + "/normal_3.png" },
+  { name: "로고형 1", file: process.env.PUBLIC_URL + "/logo_1.png" },
+  { name: "로고형 2", file: process.env.PUBLIC_URL + "/logo_2.png" },
+  { name: "확장형 1", file: process.env.PUBLIC_URL + "/expand_1.png" },
+  { name: "확장형 2", file: process.env.PUBLIC_URL + "/expand_2.png" },
+  { name: "확장형 3", file: process.env.PUBLIC_URL + "/expand_3.png" },
+  { name: "썸네일형 1", file: process.env.PUBLIC_URL + "/thumb_1.png" },
+  { name: "썸네일형 2", file: process.env.PUBLIC_URL + "/thumb_2.png" }
 ];
 
 const PREVIEW_W = 375;
 const PREVIEW_H = 240;
 const PREVIEW_MOBILE_W = 375;
 const PREVIEW_MOBILE_H = 812;
-const CONFIRM_IMAGE = process.env.PUBLIC_URL + "/스플래시_일반형_확인용.png";
+const CONFIRM_IMAGE = process.env.PUBLIC_URL + "/confirm.png";
 
 function formatSize(bytes) {
   if (!bytes && bytes !== 0) return "-";
