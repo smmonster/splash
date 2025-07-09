@@ -1,38 +1,399 @@
-.App {
-  text-align: center;
+body {
+  background: #f5f6fa;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.multi-overlay-root {
   min-height: 100vh;
+  background: #f5f6fa;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 0 24px 0;
+}
+
+.multi-overlay-card {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 16px rgba(90,90,90,0.07);
+  max-width: 900px;
+  width: 100%;
+  padding: 40px 44px 36px 44px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+
+.multi-overlay-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  text-align: left;
+  color: #222;
+  margin: 0 0 10px 0;
+  letter-spacing: -1px;
+}
+
+.overlay-upload-area {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.overlay-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 13px 27px;
+  background: #36383f;
+  color: #fff;
+  border-radius: 4px;
+  border: 1.5px solid #36383f;
+  font-weight: 600;
+  font-size: 1.09rem;
+  cursor: pointer;
+  box-shadow: 0 1.5px 7px rgba(80,80,80,0.07);
+  transition: background 0.18s, color 0.18s, border 0.18s;
+  user-select: none;
+  outline: none;
+  position: relative;
+}
+.overlay-upload-btn:hover,
+.overlay-upload-btn:focus {
+  background: #fff;
+  color: #232323;
+  border: 1.5px solid #232323;
+}
+.overlay-upload-btn input[type="file"] {
+  display: none;
+}
+.upload-arrow::before {
+  content: "⬆️";
+  font-size: 1.18em;
+  margin-right: 5px;
+}
+
+.all-check-area {
+  min-width: 480px;
+  max-width: 850px;
+  width: 100%;
+  background: #fafbfc;
+  border: 1.2px solid #e3e3e3;
+  border-radius: 6px;
+  box-shadow: 0 1.5px 9px rgba(60,60,60,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 33px 30px 28px 30px;
+  margin-bottom: 32px;
+  margin-top: 4px;
+}
+
+.sub-section-title {
+  font-size: 1.22rem;
+  color: #232323;
+  font-weight: 800;
+  margin-bottom: 18px;
+  margin-top: 50px;
+  letter-spacing: -0.5px;
+  line-height: 1.4;
+  text-shadow: 0 1px 0 #f1f1f1;
+  padding-bottom: 6px;
+}
+.sub-section-title:first-child {
+  margin-top: 0;
+}
+
+.overlay-preview-zone.overlay-preview-zone-wide {
+  min-height: 10px;
+  background: #fff;
+  border-radius: 0;
+  border: 1.2px solid #e0e0e0;
+  margin-bottom: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+  width: auto;
+}
+.overlay-preview-origin {
+  border: 1.2px solid #e2e2e2;
+}
+
+.overlay-img,
+.overlay-img.overlay-img-wide,
+.overlay-img.overlay-guide {
+  border-radius: 0 !important;
+  position: absolute;
+  left: 0; top: 0;
+  background: none;
+  pointer-events: none;
+}
+.overlay-guide-left {
+  left: 0;
+}
+
+/* 기본 검수 결과 박스 */
+.ad-info-box-check {
+  background: #fff;
+  border-radius: 0;
+  border: 0px solid #e0e0e0;
+  padding: 10px 0px 10px 10px;
+  margin-bottom: 13px;
+  width: 100%;
+  color: #232323;
+  font-size: 15px;
+}
+.info-check-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  gap: 7px;
+  border-bottom: 1px solid #ececec;
+  padding: 7px 0 7px 0;
+}
+.info-check-row:last-child {
+  border-bottom: none;
+}
+.info-check-icon {
+  min-width: 22px;
+  font-size: 1.18rem;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.check-green { color: #3ca555; font-weight: 700; }
+.check-red { color: #d73a35; font-weight: 700; }
+.info-check-label {
+  font-weight: 600;
+  min-width: 48px;
+  color: #222;
+  font-size: 0.98rem;
+}
+.info-check-value { font-size: 0.97rem; }
+.info-check-criteria {
+  margin-left: 6px;
+  color: #999;
+  font-size: 0.94em;
 }
 
-.App-link {
-  color: #61dafb;
+.overlay-opacity-slider {
+  width: 100%;
+  margin-bottom: 5px;
+  margin-top: 2px;
+  color: #555;
+  font-size: 1.01rem;
+  text-align: left;
+}
+.overlay-opacity-slider input[type="range"] {
+  accent-color: #232323;
+  margin: 0 7px;
+  vertical-align: middle;
+}
+.slider-value {
+  color: #232323;
+  font-size: 0.99em;
+  font-weight: 700;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.guide-layout-2col {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: 100%;
+  margin-top: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 900px;
+}
+
+.guide-overlay-preview-col {
+  width: 375px;
+  min-width: 375px;
+  max-width: 375px;
+}
+
+.guide-list-col {
+  width: 350px;
+  min-width: 220px;
+  max-width: 400px;
+  background: #f6f8fc;
+  border-radius: 7px;
+  border: 1px solid #e6eaf2;
+  padding: 12px 14px 14px 14px;
+  box-shadow: 0 2px 13px rgba(80,120,180,0.07);
+  height: fit-content;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.guide-list-ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.guide-list-item {
+  padding: 12px 9px 10px 9px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  margin-bottom: 7px;
+  background: #fff;
+  font-size: 1.01em;
+  transition: box-shadow 0.15s, border 0.16s, background 0.16s;
+  box-shadow: 0 1.5px 7px rgba(100,110,160,0.04);
+}
+.guide-list-item:last-child {
+  margin-bottom: 0;
+}
+.guide-list-item:hover {
+  border: 1.5px solid #6e91e9;
+  background: #f5f9ff;
+}
+.guide-list-item.active {
+  border: 2.5px solid #2a53ca;
+  background: #f1f5ff;
+  box-shadow: 0 2.5px 9px rgba(40,110,210,0.09);
+}
+.guide-list-title-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+}
+.guide-list-title-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.guide-recommend-badge {
+  background: linear-gradient(90deg,#448bff 45%,#65e5f5 98%);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.78em;
+  padding: 2px 6px;
+  margin-left: 4px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+.guide-error-percent {
+  min-width: 48px;
+  text-align: right;
+  font-size: 0.83em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  /* 기본색은 연한회색, 추천은 인라인 style로 초록색 */
+}
+.guide-list-header-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 6px;
+  margin-top: 2px;
+}
+.guide-list-header-label {
+  color: #757575;
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-right: 2px;
+}
+.multi-overlay-footer {
+  text-align: center;
+  color: #adadad;
+  font-size: 13px;
+  margin-top: 24px;
+  user-select: none;
+  letter-spacing: -0.5px;
+}
+.tab-header-row {
+  display: flex;
+  border-bottom: 2.5px solid #e9ecf4;
+  margin-bottom: 28px;
+  gap: 2px;
+}
+.tab-header-row {
+  display: flex;
+  gap: 0;
+  border-bottom: 1.5px solid #ececec;
+  margin-bottom: 20px;
+  background: none;
+  padding: 0;
+}
+
+.tab-header-btn {
+  background: none;
+  border: none;
+  border-radius: 0;
+  font-size: 1.07rem;
+  font-weight: 600;
+  color: #aaa;
+  padding: 10px 24px 11px 24px;
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.17s;
+  outline: none;
+  border-bottom: 2.5px solid transparent;
+}
+
+.tab-header-btn:not(.active):hover {
+  color: #222;
+}
+
+.tab-header-btn.active {
+  color: #18181a;
+  border-bottom: 2.5px solid #18181a;
+  background: none;
+}
+
+@media (max-width: 700px) {
+  .tab-header-row {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 1.5px solid #ececec;
+    margin-bottom: 15px;
   }
-  to {
-    transform: rotate(360deg);
+  .tab-header-btn {
+    border-bottom: none;
+    border-right: 2.5px solid transparent;
+    padding: 10px 0 10px 14px;
   }
+  .tab-header-btn.active {
+    border-right: 2.5px solid #18181a;
+    border-bottom: none;
+  }
+}
+.preview-mobile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 860px;
+}
+.mobile-preview-box {
+  background: #151618;
+  border-radius: 32px;
+  box-shadow: 0 8px 36px 0 #191a1d1f;
+  position: relative;
+  overflow: hidden;
+  border: 2.5px solid #cfd3de;
+}
+.preview-confirm-img {
+  z-index: 1;
+  pointer-events: none;
+  /* object-fit: cover; */
+}
+.preview-uploaded-img {
+  z-index: 2;
+  pointer-events: none;
+  object-fit: contain;
+  /* 하단 정렬 */
+  left: 0;
+  bottom: 0;
 }
