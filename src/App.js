@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import "./App.css";
 
 const GUIDE_LIST = [
-  { name: "기본형 1", file: "지도스플래시_기본형_1.png" },
-  { name: "기본형 2", file: "지도스플래시_기본형_2.png" },
-  { name: "기본형 3", file: "지도스플래시_기본형_3.png" },
-  { name: "로고형 1", file: "지도스플래시_로고형_1.png" },
-  { name: "로고형 2", file: "지도스플래시_로고형_2.png" },
-  { name: "확장형 1", file: "지도스플래시_확장형_1.png" },
-  { name: "확장형 2", file: "지도스플래시_확장형_2.png" },
-  { name: "확장형 3", file: "지도스플래시_확장형_3.png" },
-  { name: "썸네일형 1", file: "지도스플래시_썸네일형_1.png" },
-  { name: "썸네일형 2", file: "지도스플래시_썸네일형_2.png" }
+  { name: "기본형 1", file: process.env.PUBLIC_URL + "/지도스플래시_기본형_1.png" },
+  { name: "기본형 2", file: process.env.PUBLIC_URL + "/지도스플래시_기본형_2.png" },
+  { name: "기본형 3", file: process.env.PUBLIC_URL + "/지도스플래시_기본형_3.png" },
+  { name: "로고형 1", file: process.env.PUBLIC_URL + "/지도스플래시_로고형_1.png" },
+  { name: "로고형 2", file: process.env.PUBLIC_URL + "/지도스플래시_로고형_2.png" },
+  { name: "확장형 1", file: process.env.PUBLIC_URL + "/지도스플래시_확장형_1.png" },
+  { name: "확장형 2", file: process.env.PUBLIC_URL + "/지도스플래시_확장형_2.png" },
+  { name: "확장형 3", file: process.env.PUBLIC_URL + "/지도스플래시_확장형_3.png" },
+  { name: "썸네일형 1", file: process.env.PUBLIC_URL + "/지도스플래시_썸네일형_1.png" },
+  { name: "썸네일형 2", file: process.env.PUBLIC_URL + "/지도스플래시_썸네일형_2.png" }
 ];
 
 const PREVIEW_W = 375;
 const PREVIEW_H = 240;
 const PREVIEW_MOBILE_W = 375;
 const PREVIEW_MOBILE_H = 812;
-const CONFIRM_IMAGE = "스플래시_일반형_확인용.png";
+const CONFIRM_IMAGE = process.env.PUBLIC_URL + "/스플래시_일반형_확인용.png";
 
 function formatSize(bytes) {
   if (!bytes && bytes !== 0) return "-";
@@ -274,7 +274,7 @@ export default function SplashMaterialCheck() {
                   />
                   {selectedGuideIdx !== null && (
                     <img
-                      src={`/${GUIDE_LIST[selectedGuideIdx].file}`}
+                      src={`${GUIDE_LIST[selectedGuideIdx].file}`}
                       alt={`Guide overlay`}
                       className="overlay-img overlay-guide overlay-guide-left"
                       style={{
