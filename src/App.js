@@ -368,7 +368,7 @@ export default function SplashMaterialCheck() {
               >
                 {/* 확인용 모바일 배경 */}
                 <img
-                  src={`/${CONFIRM_IMAGE}`}
+                  src={`${CONFIRM_IMAGE}`}
                   alt="확인용 기기"
                   className="preview-confirm-img"
                   style={{
