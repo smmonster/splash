@@ -3,7 +3,7 @@ import "./App.css";
 
 const TYPE_LIST = [
   { key: "normal", label: "일반형" },
-  { key: "full", label: "전면형" },
+  { key: "full", label: "전면형", url: "https://smmonster.github.io/splash_p/" },
 ];
 
 const GUIDE_LIST = [
@@ -148,13 +148,18 @@ export default function SplashMaterialCheck() {
             key={type.key}
             className={`top-type-tab-btn${materialType === type.key ? " active" : ""}`}
             onClick={() => {
-              setMaterialType(type.key);
-              setCurrentTab("basic");
-              setUploadedImage(null);
-              setImageInfo({ w: null, h: null, size: null, type: null, isPng: false, isTransparent: false, name: "" });
-              setErrorPercents([]);
-              setSelectedGuideIdx(0);
-            }}
+  if (type.key === "full" && type.url) {
+    window.location.href = type.url;   // 전면형이면 외부 링크로 이동
+    return;
+  }
+  // 일반형은 기존 로직 유지
+  setMaterialType(type.key);
+  setCurrentTab("basic");
+  setUploadedImage(null);
+  setImageInfo({ w: null, h: null, size: null, type: null, isPng: false, isTransparent: false, name: "" });
+  setErrorPercents([]);
+  setSelectedGuideIdx(0);
+}}
             type="button"
           >
             {type.label}
