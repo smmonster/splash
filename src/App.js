@@ -172,7 +172,7 @@ export default function SplashMaterialCheck() {
         {materialType === "normal" && (
           <div className="multi-overlay-root">
             <div className="multi-overlay-card">
-              <h1 className="multi-overlay-title">지도 스플래시 광고 '일반형' 소재 검수</h1>
+              <h1 className="multi-overlay-title">스플래시 광고 '일반형' 검수</h1>
               <p className="multi-overlay-desc">
                 * 소재 기본 가이드 검수<br/>
                 * 소재 여백 가이드 검수 (/w 가이드 일치율 확인)<br/>
