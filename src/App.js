@@ -73,14 +73,26 @@ const TAB_LIST = [
   { key: "preview", label: "미리보기" }
 ];
 
+// 업로드 아이콘 (드롭존 내부)
+function UploadIcon() {
+  return (
+    <svg className="upload-dropzone-icon" width="30" height="30" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 15V4" />
+      <path d="M7.5 8.5L12 4l4.5 4.5" />
+      <path d="M5 16v2.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V16" />
+    </svg>
+  );
+}
+
 export default function SplashMaterialCheck() {
-  const [materialType, setMaterialType] = useState("normal");
   const [uploadedImage, setUploadedImage] = useState(null);
   const [imageInfo, setImageInfo] = useState({ w: null, h: null, size: null, type: null, isPng: false, isTransparent: false, name: "" });
   const [selectedGuideIdx, setSelectedGuideIdx] = useState(0);
   const [errorPercents, setErrorPercents] = useState([]);
   const [guideOpacity, setGuideOpacity] = useState(0.4);
   const [currentTab, setCurrentTab] = useState("basic");
+  const [dragOver, setDragOver] = useState(false);
 
   // 소재 업로드
   const handleFileChange = async (e) => {
@@ -130,6 +142,19 @@ export default function SplashMaterialCheck() {
     }
   };
 
+  // 드래그&드롭 업로드
+  const fileDropProps = {
+    onDragOver: (e) => { e.preventDefault(); },
+    onDragEnter: (e) => { e.preventDefault(); setDragOver(true); },
+    onDragLeave: (e) => { e.preventDefault(); setDragOver(false); },
+    onDrop: (e) => {
+      e.preventDefault();
+      setDragOver(false);
+      const files = e.dataTransfer.files;
+      if (files && files.length) handleFileChange({ target: { files } });
+    },
+  };
+
   // 추천 1~3 뱃지
   const recommendOrder = errorPercents.length
     ? errorPercents
@@ -140,54 +165,45 @@ export default function SplashMaterialCheck() {
     : [];
 
   return (
-    <div className="top-tab-main-wrapper">
-      {/* 최상단 가로 구분 탭 */}
-      <div className="top-type-tab-row">
-        {TYPE_LIST.map((type) => (
-          <button
-            key={type.key}
-            className={`top-type-tab-btn${materialType === type.key ? " active" : ""}`}
-            onClick={() => {
-  if (type.key === "full" && type.url) {
-    window.location.href = type.url;   // 전면형이면 외부 링크로 이동
-    return;
-  }
-  // 일반형은 기존 로직 유지
-  setMaterialType(type.key);
-  setCurrentTab("basic");
-  setUploadedImage(null);
-  setImageInfo({ w: null, h: null, size: null, type: null, isPng: false, isTransparent: false, name: "" });
-  setErrorPercents([]);
-  setSelectedGuideIdx(0);
-}}
-            type="button"
-          >
-            {type.label}
-          </button>
-        ))}
-      </div>
+    <div className="full-layout">
+      {/* 좌측 트리 내비게이션 */}
+      <aside className="side-tree">
+        <div className="side-tree-title">스플래시 검수</div>
+        <ul className="tree">
+          <li>
+            <button className="tree-leaf active" type="button">일반형</button>
+          </li>
+          <li className="tree-divider" aria-hidden="true"></li>
+          <li>
+            <button
+              className="tree-leaf tree-leaf--external"
+              type="button"
+              onClick={() => { window.location.href = TYPE_LIST.find(t => t.key === "full").url; }}
+            >전면형 ↗</button>
+          </li>
+        </ul>
+      </aside>
 
-      {/* 메인 컨텐츠 */}
-      <div className="material-content-area">
-        {materialType === "normal" && (
+      {/* 우측 콘텐츠 (기존 그대로) */}
+      <div className="full-content">
+        {/* 메인 컨텐츠 */}
+        <div className="material-content-area">
           <div className="multi-overlay-root">
             <div className="multi-overlay-card">
-              <h1 className="multi-overlay-title">스플래시 광고 '일반형' 검수</h1>
-              <p className="multi-overlay-desc">
-                * 소재 기본 가이드 검수<br/>
-                * 소재 여백 가이드 검수 (/w 가이드 일치율 확인)<br/>
-                * 소재 적용화면 미리보기
-              </p>
-
-              {/* 업로드 버튼: 탭 위로 */}
-              <div className="overlay-upload-area">
-                <label htmlFor="img-upload" className="overlay-upload-btn">
-                  <span className="upload-arrow" /> 스플래시 '일반형' 소재 업로드
+              {/* 업로드 버튼 (드래그&드롭 지원) */}
+              <div
+                className={`overlay-upload-area${dragOver ? " drag-over" : ""}`}
+                {...fileDropProps}
+              >
+                <label htmlFor="img-upload" className="upload-dropzone-label">
+                  <UploadIcon />
+                  <div className="upload-dropzone-title">클릭하거나 여기로 파일을 끌어다 놓으세요 (png)</div>
                   <input
                     id="img-upload"
                     type="file"
                     accept="image/png"
                     onChange={handleFileChange}
+                    style={{ display: "none" }}
                   />
                 </label>
               </div>
@@ -447,7 +463,7 @@ export default function SplashMaterialCheck() {
               ⓒ {new Date().getFullYear()} 광고 소재 검수 툴
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

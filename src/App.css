@@ -46,7 +46,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* ============= 메인 카드 & 기본 가이드 UI ============= */
@@ -55,18 +55,19 @@ body {
   background: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 0;
+  align-items: flex-start;
+  padding: 0 0 0 12px;
 }
 
 .multi-overlay-card {
-  background: #fff;
-  border-radius: 7px;
-  box-shadow: 0 3px 24px rgba(60,80,120,0.07);
-  width: 900px;        /* ← 고정폭 */
-  max-width: none;     /* ← 반응형 제한 제거 */
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  width: 835px;       /* 여백가이드 탭(2단) 기준 고정폭 → 탭 전환 시 폭 고정 */
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 36px 40px 34px 40px;
-  margin-top: 36px;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   gap: 34px;
@@ -90,8 +91,61 @@ body {
 
 .overlay-upload-area {
   width: 100%;
-  text-align: left;
+  box-sizing: border-box;
   margin-bottom: 22px;
+  display: flex;
+  border: 1.5px dashed #c5cad3;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    45deg,
+    #fafbfc,
+    #fafbfc 7px,
+    #eef0f3 7px,
+    #eef0f3 14px
+  );
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.overlay-upload-area:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+.overlay-upload-area.drag-over {
+  border-color: #2b2f38;
+  background: repeating-linear-gradient(
+    45deg,
+    #eef0f4,
+    #eef0f4 7px,
+    #e1e4ea 7px,
+    #e1e4ea 14px
+  );
+}
+.upload-dropzone-icon {
+  color: #aeb4bf;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+}
+.overlay-upload-area.drag-over .upload-dropzone-icon {
+  color: #2b2f38;
+}
+.upload-dropzone-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 22px 20px;
+  cursor: pointer;
+}
+.upload-dropzone-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #3a3f4a;
+  line-height: 1.2;
 }
 
 .overlay-upload-btn {
@@ -151,8 +205,8 @@ body {
   border-radius: 0;
 }
 .tab-header-btn.active {
-  color: #1740d4;
-  border-bottom: 2.5px solid #2952eb;
+  color: #111111;
+  border-bottom: 2.5px solid #111111;
   background: none;
 }
 .tab-header-btn:not(.active):hover {
@@ -369,7 +423,9 @@ body {
   text-align: center;
   color: #adadad;
   font-size: 13px;
-  margin-top: 24px;
+  margin-top: auto;
+  padding-top: 32px;
+  padding-bottom: 16px;
   user-select: none;
   letter-spacing: -0.5px;
 }
@@ -427,4 +483,96 @@ body {
     background: #fff;
   }
   .multi-overlay-card { padding: 8px 2vw 8px 2vw; }
+}
+
+/* ===== 좌측 트리 내비게이션 (전면형과 동일) ===== */
+.full-layout {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+.full-content {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+}
+
+.side-tree {
+  width: 252px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 26px 14px;
+  background: #f1f3f7;
+  border-right: 1px solid #e1e4ec;
+}
+
+.side-tree-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #1b1c2e;
+  letter-spacing: -0.3px;
+  margin: 2px 0 22px;
+  padding: 0 8px 16px;
+  border-bottom: 1px solid #ebedf2;
+}
+
+.side-tree-title::before {
+  content: "";
+  width: 7px;
+  height: 18px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #8b909c, #2b2f38);
+}
+
+.tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree-divider {
+  height: 0;
+  border-top: 1px solid #ebedf2;
+  margin: 12px 6px;
+}
+
+.tree-leaf {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 9px 12px;
+  margin: 2px 0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #4b5563;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tree-leaf:hover {
+  background: #eef0f5;
+  color: #1f2937;
+}
+
+.tree-leaf.active {
+  background: #17181d;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tree-leaf--external {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.tree-leaf--external:hover {
+  background: #eef0f5;
+  color: #2b2f38;
 }
