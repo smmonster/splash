@@ -180,7 +180,7 @@ export default function SplashMaterialCheck() {
               </p>
 
               {/* 업로드 버튼: 탭 위로 */}
-              <div className="overlay-upload-area" style={{marginBottom: "22px"}}>
+              <div className="overlay-upload-area">
                 <label htmlFor="img-upload" className="overlay-upload-btn">
                   <span className="upload-arrow" /> 스플래시 '일반형' 소재 업로드
                   <input
@@ -232,7 +232,7 @@ export default function SplashMaterialCheck() {
                       />
                     </div>
                     {/* 기본가이드 검수 */}
-                    <div className="ad-info-box-check" style={{ marginBottom: 20 }}>
+                    <div className="ad-info-box-check">
                       <div className="info-check-row">
                         <span className="info-check-icon">
                           {imageInfo.w === 1125 && imageInfo.h === 732
@@ -323,7 +323,7 @@ export default function SplashMaterialCheck() {
                           />
                         )}
                       </div>
-                      <div className="overlay-opacity-slider" style={{ marginTop: 10 }}>
+                      <div className="overlay-opacity-slider">
                         <label>
                           가이드 투명도&nbsp;
                           <input
@@ -385,10 +385,7 @@ export default function SplashMaterialCheck() {
 
                 {/* 3. 미리보기 탭 */}
                 {currentTab === "preview" && uploadedImage && (
-                  <div style={{
-                    display: "flex", flexDirection: "column", alignItems: "center", width: "100%",
-                    marginTop: 16
-                  }}>
+                  <div className="preview-tab-wrap">
                     <div
                       className="mobile-preview-box"
                       style={{
@@ -449,13 +446,6 @@ export default function SplashMaterialCheck() {
             <div className="multi-overlay-footer">
               ⓒ {new Date().getFullYear()} 광고 소재 검수 툴
             </div>
-          </div>
-        )}
-
-        {/* 전면형 탭: 준비중(또는 별도 UI) */}
-        {materialType === "full" && (
-          <div className="multi-overlay-root" style={{alignItems: "center", justifyContent: "center", minHeight: "100vh"}}>
-            <div style={{fontSize: "1.5rem", color: "#7b7b7b", marginTop: "120px"}}>전면형 준비중입니다 🛠️</div>
           </div>
         )}
       </div>

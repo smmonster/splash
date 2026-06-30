@@ -91,7 +91,7 @@ body {
 .overlay-upload-area {
   width: 100%;
   text-align: left;
-  margin-bottom: 4px;
+  margin-bottom: 22px;
 }
 
 .overlay-upload-btn {
@@ -198,7 +198,7 @@ body {
   border-radius: 0;
   border: 0px solid #e0e0e0;
   padding: 10px 0px 10px 10px;
-  margin-bottom: 13px;
+  margin-bottom: 20px;
   width: 100%;
   color: #232323;
   font-size: 15px;
@@ -237,10 +237,18 @@ body {
 .overlay-opacity-slider {
   width: 100%;
   margin-bottom: 5px;
-  margin-top: 2px;
+  margin-top: 10px;
   color: #555;
   font-size: 1.01rem;
   text-align: left;
+}
+
+.preview-tab-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
 }
 .overlay-opacity-slider input[type="range"] {
   accent-color: #232323;
