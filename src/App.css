@@ -537,7 +537,7 @@ body {
 .tree-divider {
   height: 0;
   border-top: 1px solid #ebedf2;
-  margin: 12px 6px;
+  margin: 5px 6px;
 }
 
 .tree-leaf {
@@ -568,8 +568,13 @@ body {
 }
 
 .tree-leaf--external {
-  color: #6b7280;
-  font-weight: 500;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.tree-external-arrow {
+  color: #2952eb;
+  font-weight: 700;
 }
 
 .tree-leaf--external:hover {

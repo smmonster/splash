@@ -179,7 +179,7 @@ export default function SplashMaterialCheck() {
               className="tree-leaf tree-leaf--external"
               type="button"
               onClick={() => { window.location.href = TYPE_LIST.find(t => t.key === "full").url; }}
-            >전면형 ↗</button>
+            >전면형 <span className="tree-external-arrow">↗</span></button>
           </li>
         </ul>
       </aside>
