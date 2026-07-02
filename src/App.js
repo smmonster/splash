@@ -85,6 +85,23 @@ function UploadIcon() {
   );
 }
 
+// 좌측 트리 메뉴 아이콘
+function TreeIcon({ type }) {
+  const p = {
+    width: 16, height: 16, viewBox: "0 0 24 24", fill: "none",
+    stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round",
+    strokeLinejoin: "round", className: "tree-icon", "aria-hidden": true,
+  };
+  switch (type) {
+    case "screen":
+      return (<svg {...p}><rect x="3" y="4" width="18" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></svg>);
+    case "full":
+      return (<svg {...p}><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>);
+    default:
+      return null;
+  }
+}
+
 export default function SplashMaterialCheck() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [imageInfo, setImageInfo] = useState({ w: null, h: null, size: null, type: null, isPng: false, isTransparent: false, name: "" });
@@ -171,7 +188,7 @@ export default function SplashMaterialCheck() {
         <div className="side-tree-title">스플래시 검수</div>
         <ul className="tree">
           <li>
-            <button className="tree-leaf active" type="button">일반형</button>
+            <button className="tree-leaf active" type="button"><TreeIcon type="screen" /><span>일반형</span></button>
           </li>
           <li className="tree-divider" aria-hidden="true"></li>
           <li>
@@ -179,7 +196,7 @@ export default function SplashMaterialCheck() {
               className="tree-leaf tree-leaf--external"
               type="button"
               onClick={() => { window.location.href = TYPE_LIST.find(t => t.key === "full").url; }}
-            >전면형 <span className="tree-external-arrow">↗</span></button>
+            ><TreeIcon type="full" /><span>전면형</span><span className="tree-external-arrow">↗</span></button>
           </li>
         </ul>
       </aside>
@@ -209,17 +226,19 @@ export default function SplashMaterialCheck() {
               </div>
 
               {/* 탭 헤더 */}
-              <div className="tab-header-row">
-                {TAB_LIST.map(tab => (
-                  <button
-                    key={tab.key}
-                    className={`tab-header-btn${currentTab === tab.key ? " active" : ""}`}
-                    onClick={() => setCurrentTab(tab.key)}
-                    type="button"
-                  >
-                    {tab.label}
-                  </button>
-                ))}
+              <div className="tab-header-wrap">
+                <div className="tab-header-row">
+                  {TAB_LIST.map(tab => (
+                    <button
+                      key={tab.key}
+                      className={`tab-header-btn${currentTab === tab.key ? " active" : ""}`}
+                      onClick={() => setCurrentTab(tab.key)}
+                      type="button"
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               {/* 탭 컨텐츠 */}
