@@ -26,10 +26,11 @@ const PREVIEW_MOBILE_H = 812;
 const CONFIRM_IMAGE = process.env.PUBLIC_URL + "/confirm.png";
 
 function formatSize(bytes) {
+  // Finder(macOS)와 동일한 10진(SI) 단위: 1KB=1,000 / 1MB=1,000,000
   if (!bytes && bytes !== 0) return "-";
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  if (bytes < 1000) return `${bytes} B`;
+  if (bytes < 1000 * 1000) return `${(bytes / 1000).toFixed(1)} KB`;
+  return `${(bytes / (1000 * 1000)).toFixed(2)} MB`;
 }
 
 async function getOverlapErrorPercent(src1, src2, width, height) {
@@ -282,7 +283,7 @@ export default function SplashMaterialCheck() {
                       </div>
                       <div className="info-check-row">
                         <span className="info-check-icon">
-                          {imageInfo.size <= 400 * 1024
+                          {imageInfo.size <= 400 * 1000
                             ? <span className="check-green">✔</span>
                             : <span className="check-red">✖</span>}
                         </span>
